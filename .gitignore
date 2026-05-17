@@ -33,3 +33,6 @@ build/
 # AI session context (local only)
 CLAUDE.md
 TECHNICAL.md
+
+# built binary (never commit)
+/cache-cli
