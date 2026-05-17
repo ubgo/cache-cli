@@ -4,6 +4,8 @@
 
 If you operate a Go service backed by Redis through `ubgo/cache` and need to poke at the cache without writing a one-off Go program, this is the tool.
 
+> **Documentation:** a full cookbook with scripting use cases and runnable examples for every subcommand, flag, and the exit-code / stream contracts lives in [`docs/README.md`](docs/README.md).
+
 ## Why cache-cli
 
 - **Zero-glue debugging.** Inspect a production or local cache without embedding a debug endpoint in your service.
