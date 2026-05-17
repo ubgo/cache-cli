@@ -1,3 +1,5 @@
+// main_test.go — tests for cache-cli (run() driven against miniredis: set/get/del flow, keys -json prefix scan, unknown-command/usage exit codes, -ns namespace isolation).
+
 package main
 
 import (

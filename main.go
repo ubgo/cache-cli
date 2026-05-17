@@ -1,3 +1,24 @@
+// main.go — the cache-cli inspector entrypoint and all command logic (package main, github.com/ubgo/cache-cli).
+//
+// Package role: cache-cli is the inspector CLI in the ubgo/cache family — it
+// talks to a Redis backend through the github.com/ubgo/cache-redis adapter
+// (so it is written entirely against the cache.Cache interface). This file
+// has no doc.go; the // Command … block below is the package doc.
+//
+// This file: defines main (a thin os.Exit(run(...)) shell), the usage text,
+// and run — which parses flags, builds the redis adapter (optionally
+// cache.Namespaced), and dispatches get/set/del/stats/keys/help.
+// Contracts an AI must keep: exit codes are 0 success / 1 runtime or backend
+// error or get-miss / 2 usage error (bad flags, no command, wrong arg count,
+// unknown command) — scripts depend on this, do not change it; machine /
+// value output goes to stdout, human messages (errors, "not found", usage)
+// go to stderr so -json and piped values stay clean; flag.ContinueOnError
+// (not ExitOnError) and injected stdout/stderr keep run unit-testable.
+//
+// AI-context: the fmt.Fprint* writes to stdout deliberately ignore errors —
+// .golangci.yml already excludes them from errcheck; keep that arrangement so
+// CI stays green (do not wrap these in error checks).
+
 // Command cache-cli is a minimal inspector for a github.com/ubgo/cache Redis
 // backend: get/set/del/stats/keys with an optional --json output and a
 // non-zero exit on failure (scriptable).
