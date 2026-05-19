@@ -46,9 +46,10 @@ Use cases:
 - Manually override a value for debugging.
 
 ```sh
-cache-cli set token abc -ttl 5m            # NOTE: flags go before the command
+# All flags MUST precede the subcommand; -ttl after `set` is ignored.
+cache-cli -ttl 5m set token abc
 cache-cli -addr prod-redis:6379 -ttl 5m set token abc
-cache-cli -json set token abc -ttl 5m      # {"key":"token","ttl":"5m0s"}
+cache-cli -json -ttl 5m set token abc      # {"key":"token","ttl":"5m0s"}
 ```
 
 ### del

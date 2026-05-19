@@ -39,7 +39,8 @@ Requires **Go 1.24+**. The binary is named `cache-cli`.
 cache-cli -addr localhost:6379 stats
 
 # Store a value with a 5-minute TTL, then read it back.
-cache-cli -addr localhost:6379 set session:abc '{"uid":42}' -ttl 5m
+# All flags MUST come before the subcommand.
+cache-cli -addr localhost:6379 -ttl 5m set session:abc '{"uid":42}'
 cache-cli -addr localhost:6379 get session:abc
 
 # List everything under a prefix as JSON.
@@ -79,7 +80,7 @@ cache-cli [flags] <command> [args]
 | `-json` | bool | `false` | Emit machine-readable JSON instead of plain text. |
 | `-h`, `-help`, `help` | — | — | Print usage and exit `0`. |
 
-Flags may appear before or after the command (Go's `flag` package allows interspersed flags only before positional args; place flags before the command for reliability — e.g. `cache-cli -ns svc set k v -ttl 5m` works because `-ttl` is parsed before `set`'s positionals are consumed).
+**All flags must come before the subcommand.** The CLI parses one flag set over the whole argument list and Go's `flag` parser stops at the first non-flag argument (the subcommand). Anything after the command — including `-ttl` or `-json` — is treated as a positional argument and ignored, so `cache-cli set k v -ttl 5m` silently stores `k` with **no** TTL. Correct: `cache-cli -ttl 5m set k v`.
 
 ### `get <key>` — read a value
 
@@ -101,10 +102,10 @@ Exit `1` if the key is missing (`cache.ErrNotFound`) or on any backend error. `n
 cache-cli -addr localhost:6379 set token abc123
 # -> OK
 
-cache-cli -addr localhost:6379 set token abc123 -ttl 90s
+cache-cli -addr localhost:6379 -ttl 90s set token abc123
 # -> OK
 
-cache-cli -addr localhost:6379 -json set token abc123 -ttl 90s
+cache-cli -addr localhost:6379 -json -ttl 90s set token abc123
 # -> {"key":"token","ttl":"1m30s"}
 ```
 
