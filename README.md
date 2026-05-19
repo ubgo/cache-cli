@@ -1,6 +1,8 @@
 # ubgo/cache-cli — cache inspector CLI for Go / Redis
 
-![coverage](https://img.shields.io/badge/coverage-99%25-brightgreen)
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/ubgo/cache-cli.svg)](https://pkg.go.dev/github.com/ubgo/cache-cli) [![Go Report Card](https://goreportcard.com/badge/github.com/ubgo/cache-cli)](https://goreportcard.com/report/github.com/ubgo/cache-cli) [![test](https://github.com/ubgo/cache-cli/actions/workflows/test.yml/badge.svg)](https://github.com/ubgo/cache-cli/actions/workflows/test.yml) [![lint](https://github.com/ubgo/cache-cli/actions/workflows/lint.yml/badge.svg)](https://github.com/ubgo/cache-cli/actions/workflows/lint.yml) ![coverage](https://img.shields.io/badge/coverage-99%25-brightgreen) [![tag](https://img.shields.io/github/v/tag/ubgo/cache-cli?sort=semver)](https://github.com/ubgo/cache-cli/tags) [![license](https://img.shields.io/badge/license-source--available-blue)](./LICENSE) ![Go](https://img.shields.io/badge/go-1.24-00ADD8?logo=go)
+
 
 `cache-cli` is a tiny, scriptable command-line **cache inspector for Go** apps that use a [`github.com/ubgo/cache`](https://github.com/ubgo/cache) Redis backend. It lets you `get`, `set`, `del`, dump `stats`, and `keys`-scan a live Redis cache from your shell or CI pipeline — with optional machine-readable JSON output and meaningful exit codes for scripting.
 
